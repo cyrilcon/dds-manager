@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Operation(models.Model):
@@ -6,7 +7,7 @@ class Operation(models.Model):
 
     created_at = models.DateField(
         verbose_name="Дата создания записи",
-        auto_now_add=True,
+        default=timezone.now,
         help_text="Заполняется автоматически, но может быть изменена вручную",
     )
     status = models.ForeignKey(
@@ -46,9 +47,9 @@ class Operation(models.Model):
     )
 
     class Meta:
-        verbose_name = "Запись о движении денежных средств"
-        verbose_name_plural = "Записи о движении денежных средств"
+        verbose_name = "Запись"
+        verbose_name_plural = "Записи"
         ordering = ["-created_at"]
 
     def __str__(self) -> str:
-        return f"{self.created_at} | {self.status} | {self.type} | {self.category} | {self.subcategory} | {self.amount}₽"
+        return f"{self.created_at.strftime("%d.%m.%Y")} | {self.status} | {self.type} | {self.category} | {self.subcategory} | {self.amount}₽"
