@@ -17,11 +17,13 @@ Including another URLconf
 
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
 
 from dds_manager import settings
 
 urlpatterns = [
+    path("", lambda request: redirect("admin/")),
     path("admin/", admin.site.urls),
     path("chaining/", include("smart_selects.urls")),
 ]
