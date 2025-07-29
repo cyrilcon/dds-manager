@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 from smart_selects.db_fields import ChainedForeignKey
@@ -64,3 +65,7 @@ class Operation(models.Model):
 
     def __str__(self) -> str:
         return f"{self.created_at.strftime("%d.%m.%Y")} | {self.status} | {self.type} | {self.category} | {self.subcategory} | {self.amount}₽"
+
+    def clean(self):
+        if self.amount <= 0:
+            raise ValidationError({"amount": "Сумма должна быть положительной."})
