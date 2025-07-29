@@ -1,0 +1,23 @@
+[
+{
+  "model": "catalogs.status",
+  "pk": 1,
+  "fields": {
+    "name": "Бизнес"
+  }
+},
+{
+  "model": "catalogs.status",
+  "pk": 2,
+  "fields": {
+    "name": "Личное"
+  }
+},
+{
+  "model": "catalogs.status",
+  "pk": 3,
+  "fields": {
+    "name": "Налог"
+  }
+}
+]

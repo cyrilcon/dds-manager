@@ -1,0 +1,16 @@
+[
+{
+  "model": "catalogs.type",
+  "pk": 1,
+  "fields": {
+    "name": "Пополнение"
+  }
+},
+{
+  "model": "catalogs.type",
+  "pk": 2,
+  "fields": {
+    "name": "Списание"
+  }
+}
+]

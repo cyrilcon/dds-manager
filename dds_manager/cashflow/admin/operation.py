@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
-from rangefilter.filters import DateRangeFilter, DateRangeQuickSelectListFilter
+from rangefilter.filters import DateRangeQuickSelectListFilter
 
 from cashflow.models import Operation
 
