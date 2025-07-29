@@ -1,6 +1,6 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+from smart_selects.db_fields import ChainedForeignKey
 
 
 class Operation(models.Model):
@@ -23,14 +23,24 @@ class Operation(models.Model):
         verbose_name="Тип",
         related_name="operations",
     )
-    category = models.ForeignKey(
+    category = ChainedForeignKey(
         "catalogs.Category",
+        chained_field="type",
+        chained_model_field="type",
+        show_all=False,
+        auto_choose=False,
+        sort=True,
         on_delete=models.PROTECT,
         verbose_name="Категория",
         related_name="operations",
     )
-    subcategory = models.ForeignKey(
+    subcategory = ChainedForeignKey(
         "catalogs.Subcategory",
+        chained_field="category",
+        chained_model_field="category",
+        show_all=False,
+        auto_choose=False,
+        sort=True,
         on_delete=models.PROTECT,
         verbose_name="Подкатегория",
         related_name="operations",
@@ -54,13 +64,3 @@ class Operation(models.Model):
 
     def __str__(self) -> str:
         return f"{self.created_at.strftime("%d.%m.%Y")} | {self.status} | {self.type} | {self.category} | {self.subcategory} | {self.amount}₽"
-
-    def clean(self) -> None:
-        super().clean()
-        if self.category_id and self.category.type_id != self.type_id:
-            error_message = "Выбранная категория не относится к выбранному типу."
-            raise ValidationError(error_message)
-
-        if self.subcategory_id and self.subcategory.category_id != self.category_id:
-            error_message = "Выбранная подкатегория не относится к выбранной категории."
-            raise ValidationError(error_message)

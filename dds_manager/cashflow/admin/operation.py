@@ -1,14 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
 
-from cashflow.forms import OperationForm
 from cashflow.models import Operation
 
 
 @admin.register(Operation)
 class OperationAdmin(admin.ModelAdmin):
-    form = OperationForm
-
     fields = [
         "created_at",
         "status",
