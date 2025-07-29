@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "debug_toolbar",
+    "rangefilter",
     "smart_selects",
     "cashflow.apps.CashflowConfig",
     "catalogs.apps.CatalogsConfig",

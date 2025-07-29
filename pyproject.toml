@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "django>=5.2.4",
+    "django-admin-rangefilter>=0.13.3",
     "django-smart-selects>=1.7.2",
 ]
 

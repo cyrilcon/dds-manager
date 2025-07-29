@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
+from rangefilter.filters import DateRangeFilter
 
 from cashflow.models import Operation
 
@@ -24,7 +25,13 @@ class OperationAdmin(admin.ModelAdmin):
         "amount_rubles",
         "comment",
     ]
-    list_filter = ["status", "type", "category", "subcategory"]
+    list_filter = [
+        ("created_at", DateRangeFilter),
+        "status",
+        "type",
+        "category",
+        "subcategory",
+    ]
     search_fields = [
         "status__name",
         "type__name",
