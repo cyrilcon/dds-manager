@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
@@ -53,3 +54,18 @@ class Operation(models.Model):
 
     def __str__(self) -> str:
         return f"{self.created_at.strftime("%d.%m.%Y")} | {self.status} | {self.type} | {self.category} | {self.subcategory} | {self.amount}₽"
+
+    def clean(self):
+        super().clean()
+
+        if self.category_id and self.type_id:
+            if self.category.type_id != self.type_id:
+                raise ValidationError(
+                    "Выбранная категория не относится к выбранному типу."
+                )
+
+        if self.subcategory_id and self.category_id:
+            if self.subcategory.category_id != self.category_id:
+                raise ValidationError(
+                    "Выбранная подкатегория не относится к выбранной категории."
+                )
