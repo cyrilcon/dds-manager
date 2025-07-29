@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group, User
-from rangefilter.filters import DateRangeFilter
+from rangefilter.filters import DateRangeFilter, DateRangeQuickSelectListFilter
 
 from cashflow.models import Operation
 
@@ -26,7 +26,7 @@ class OperationAdmin(admin.ModelAdmin):
         "comment",
     ]
     list_filter = [
-        ("created_at", DateRangeFilter),
+        ("created_at", DateRangeQuickSelectListFilter),
         "status",
         "type",
         "category",
