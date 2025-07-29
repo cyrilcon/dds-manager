@@ -1,3 +1,5 @@
+from typing import Any
+
 from django import forms
 
 from cashflow.models import Operation
@@ -6,9 +8,17 @@ from cashflow.models import Operation
 class OperationForm(forms.ModelForm):
     class Meta:
         model = Operation
-        fields = "__all__"
+        fields = [
+            "created_at",
+            "status",
+            "type",
+            "category",
+            "subcategory",
+            "amount",
+            "comment",
+        ]
 
-    def clean(self):
+    def clean(self) -> dict[str, Any]:
         cleaned_data = super().clean()
         type_ = cleaned_data.get("type")
         category = cleaned_data.get("category")
@@ -16,10 +26,14 @@ class OperationForm(forms.ModelForm):
 
         if category.type != type_:
             self.add_error(
-                "category", "Выбранная категория не связана с текущем типом операции."
+                "category",
+                "Выбранная категория не связана с текущем типом операции.",
             )
 
         if subcategory.category != category:
             self.add_error(
-                "subcategory", "Выбранная подкатегория не связана с текущей категорией."
+                "subcategory",
+                "Выбранная подкатегория не связана с текущей категорией.",
             )
+
+        return cleaned_data
