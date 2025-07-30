@@ -21,7 +21,7 @@ categories, and subcategories.
 
 ## Technology Stack
 
-* **Backend:** Python 3.11, Django 5
+* **Backend:** Python 3.13, Django 5
 * **Database:** PostgreSQL 17 (Dockerized)
 * **Frontend:** Django Admin (with Smart Selects)
 * **Deployment:** Docker & Docker Compose
@@ -44,7 +44,7 @@ categories, and subcategories.
 
 1. Clone the repository:
    ```sh
-   git clone git@github.com:cyrilcon/dds-manager.git
+   git clone https://github.com/cyrilcon/dds-manager.git
    ```
 
 2. Navigate to the project directory:
