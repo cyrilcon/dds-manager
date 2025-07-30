@@ -60,7 +60,7 @@ services:
     networks:
       - dds_manager
     ports:
-      - "80:8088"
+      - "80:80"
     volumes:
       - static_volume:/usr/src/app/dds_manager/static
       - ./nginx:/etc/nginx/conf.d
