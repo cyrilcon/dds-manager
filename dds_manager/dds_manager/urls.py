@@ -15,18 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from debug_toolbar.toolbar import debug_toolbar_urls
 from django.contrib import admin
 from django.shortcuts import redirect
-from django.urls import path, include
+from django.urls import include, path
 
 from dds_manager import settings
 
 urlpatterns = [
-    path("", lambda request: redirect("admin/")),
+    path("", lambda _: redirect("admin/")),
     path("admin/", admin.site.urls),
     path("chaining/", include("smart_selects.urls")),
 ]
 
 if settings.DEBUG:
-    urlpatterns.extend(debug_toolbar_urls())
+    import debug_toolbar
+
+    urlpatterns += [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ]

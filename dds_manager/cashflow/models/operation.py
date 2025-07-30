@@ -66,6 +66,6 @@ class Operation(models.Model):
     def __str__(self) -> str:
         return f"{self.created_at.strftime("%d.%m.%Y")} | {self.status} | {self.type} | {self.category} | {self.subcategory} | {self.amount}₽"
 
-    def clean(self):
+    def clean(self) -> None:
         if self.amount <= 0:
             raise ValidationError({"amount": "Сумма должна быть положительной."})

@@ -8,8 +8,8 @@ dependencies = [
     "django>=5.2.4",
     "django-admin-rangefilter>=0.13.3",
     "django-smart-selects>=1.7.2",
+    "gunicorn>=23.0.0",
     "psycopg>=3.2.9",
-    "python-dotenv>=1.1.1",
 ]
 
 [dependency-groups]
