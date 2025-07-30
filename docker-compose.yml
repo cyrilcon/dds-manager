@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     working_dir: /usr/src/app/dds_manager
-    command: sh -c "python manage.py migrate && gunicorn dds_manager.wsgi:application --bind 0.0.0.0:8000"
+    command: sh -c "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn dds_manager.wsgi:application --bind 0.0.0.0:8000"
     restart: always
     env_file:
       - .env
@@ -17,6 +17,8 @@ services:
       - dds_manager
     ports:
       - "8000:8000"
+    volumes:
+      - static_volume:/usr/src/app/dds_manager/static
     stop_signal: SIGTERM
     logging:
       driver: json-file
@@ -60,7 +62,7 @@ services:
     ports:
       - "80:8088"
     volumes:
-      - ./dds_manager/static:/usr/src/app/dds_manager/static
+      - static_volume:/usr/src/app/dds_manager/static
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - django
@@ -73,3 +75,5 @@ networks:
 volumes:
   dds_manager_postgres_volume:
     name: dds_manager_postgres_volume
+  static_volume:
+    name: static_volume

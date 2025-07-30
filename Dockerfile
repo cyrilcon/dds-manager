@@ -14,4 +14,4 @@ RUN uv pip install . --system
 
 COPY . .
 
-CMD ["sh", "-c", "python manage.py migrate && gunicorn dds_manager.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && python manage.py migrate && gunicorn dds_manager.wsgi:application --bind 0.0.0.0:8000"]
